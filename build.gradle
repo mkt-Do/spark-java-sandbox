@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+
+    id 'application'
+}
+
+mainClassName = 'com.example.spark.sandbox.App'
+
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    compile group: 'com.sparkjava', name: 'spark-core', version: '2.7.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.4'
+
+    testCompile 'junit:junit:4.12'
+}
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': 'com.example.spark.sandbox.App'
+  }
+  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
+
